@@ -1,0 +1,50 @@
+
+body, h2 {
+    padding : 0;
+    margin : 0;
+}
+
+body{
+    height : 100vh;
+    background-image : url("./src/assets/cool-background.png");
+    background-repeat : no-repeat;
+    background-size : 100% 100%;
+    display : flex;
+    flex-direction : column;
+    align-items : center;
+}
+
+body section {
+    width : 40em;
+    background-color : #ffffff;
+    display : flex;
+    flex-direction : column;
+    align-items : center;
+    flex : 1;
+}
+
+.navbar-wrapper {
+    display : flex;
+    flex-direction : row;
+    align-items : center;
+    flex : 0.2;
+    background-color : #00a9be;
+}
+
+.navbar {
+    flex : 1;
+    display : flex;
+    flex-direction : column;
+    align-items : center;
+}
+
+.navbar ul {
+    padding : 0;
+    display : flex;
+    flex-direction : row;
+    gap : 1em;
+}
+
+.navbar ul li{
+    list-style : none;
+}
