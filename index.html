@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="/build/main.js"></script>
+    <script defer src="/build/main.js"></script>
     <link rel="stylesheet" href="./style.css" />
     <title>MotionType</title>
 </head>
@@ -11,18 +11,40 @@
     <section>
         <section class="navbar-wrapper">
             <div class="navbar">
-                <h2>MOTION</h2>
+                <h2 class="title">MOTION</h2>
                 <ul>
-                    <li><button>IMAGE</button></li>
-                    <li><button>VIDEO</button></li>
-                    <li><button>NOTE</button></li>
-                    <li><button>TASK</button></li>
+                    <li id="motionbtn"><button>IMAGE</button></li>
+                    <li id="motionbtn"><button>VIDEO</button></li>
+                    <li id="motionbtn"><button>NOTE</button></li>
+                    <li id="motionbtn"><button>TASK</button></li>
                 </ul>
             </div>
         </section>
         <section class="main-wrapper">
-            <div class="main-container"></div>
+            <div class="main-container">
+                <!-- <div class="typeItem">item</div> -->
+            </div>
         </section>
+    </section>
+    <section class="modal-wrapper">
+        <div class="modal-inner">
+            <div class="modal-header">
+                <button>X</button>
+            </div>
+            <div class="modal-main">
+                <div class="title">
+                    <label>Title</label>
+                    <input/>
+                </div>
+                <div class="content">
+                    <label>body</label>
+                    <input/>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button>ADD</button>
+            </div>
+        </div>
     </section>
 </body>
 </html>
