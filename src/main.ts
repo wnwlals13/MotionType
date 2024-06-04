@@ -67,7 +67,7 @@ function makeMotion<T>(arg : T): T {
     for (let i=0; i< len; i++) {
         let input = form[i].children[1] as HTMLInputElement;
         
-        
+        // 여기서 각 input value를 어떻게 넣어야 할까..?고민..
     }
     return arg;
 }
