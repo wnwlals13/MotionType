@@ -5,45 +5,66 @@ const modal_add_btn = document.querySelector(".modal-footer button");
 const modal_main = document.querySelector(".modal-inner .modal-main");
 
 /* -------------- type -------------- */
-type LinkType = {
+type Image = {
     title: string;
     url : string;
 }
 
-type BodyType = {
+type Video = {
+    title: string;
+    url : string;
+}
+
+type Note = {
     title: string;
     body : string;
 }
 
-type MotionType = LinkType | BodyType;
+type Task = {
+    title: string;
+    body : string;
+}
+
+type MotionType = Image | Video | Note | Task;
 
 /* -------------- modal -------------- */
 modal_close_btn?.addEventListener("click", closeModal);
-modal_add_btn?.addEventListener("click", makeMotion);
-
+modal_add_btn?.addEventListener("click", (e)=>{
+    e.preventDefault();
+    const result = getMotion(e);
+    makeMotion(result);
+});
 buttons.forEach(item=>item.addEventListener("click", onShowModal));
+
 function onShowModal(e:Event):void {
     const target = e.target as HTMLButtonElement;
     const buttonName = target.innerText;
 
-    if(buttonName ===  "IMAGE" || buttonName === "VIDEO" ) {
-        fillModal("url");
-    }
-    else if(buttonName === "NOTE" || buttonName === "TASK" ) {
-        fillModal("body");
-    }
-    
+    fillModal(buttonName);
     handleModalShow('show');    // 모달 보여주기
 }
 
 /* Function: 버튼 타입에 따라 모달 라벨 명 변경 */
-function fillModal(param1: string):void {
+function fillModal(btn: string):void {
     let label = modal_main?.lastElementChild?.firstElementChild as HTMLLabelElement;
-    label.innerText = param1;
+    modal_main?.parentElement?.classList.add(btn);
+    // console.log( modal_main?.parentElement?.lastElementChild?.children[0]);
+
+    if(btn === "IMAGE") {
+        label.innerText = 'url';
+    } else if (btn === "VIDEO") {
+        label.innerText = 'url';
+    } else if (btn === "NOTE") {
+        label.innerText = 'body';
+    } else {
+        label.innerText = 'body';
+    }
 }
 
 /* Funcition: 모달창 닫기 */
 function closeModal() {
+    let btn = modal_main?.parentElement?.classList[1] as string;
+    modal_main?.parentElement?.classList.remove(btn);
     handleModalShow('close');
 }
 
@@ -56,18 +77,42 @@ function handleModalShow(str: string):void {
     }
 }
 
-function makeMotion<T>(arg : T): T {
-    // let arr = [];
+function getMotion<T>(arg : T): MotionType {
     let form = modal_main?.children as HTMLCollection;
-    let label = modal_main?.lastElementChild?.firstElementChild as HTMLLabelElement;
-    let labelTxt: string = label.innerText;
+    let first = form[0].children[1] as HTMLInputElement;
+    let second = form[1].children[1] as HTMLInputElement;
     
-    // HTMLCOllection convert to Array
-    let len: number = form?.length || 0;
-    for (let i=0; i< len; i++) {
-        let input = form[i].children[1] as HTMLInputElement;
-        
-        // 여기서 각 input value를 어떻게 넣어야 할까..?고민..
+    let motion:MotionType = {
+        title :'',
+        url :''
+    };
+    if(arg instanceof Event) {
+        let e = arg.target as HTMLButtonElement;
+        let modal = e.parentElement?.parentElement as HTMLDivElement;
+        let type = modal.classList[1];  // 버튼 타입
+
+        if(type === "IMAGE" ) {
+            motion = {
+                title : first.value,
+                url : second.value,
+            } 
+        } else if (type === "VIDEO") {
+            motion = {
+                title : first.value,
+                url : second.value,
+            } 
+        } else {
+            motion = {
+                title : first.value,
+                body : second.value,
+            } 
+        }
     }
-    return arg;
+    // console.log(motion);
+    handleModalShow('close');
+    return motion;
+}
+
+function makeMotion(info:MotionType) {
+    console.log(typeof info);
 }
