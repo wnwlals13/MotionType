@@ -28,15 +28,6 @@ button {
     border-radius : 0.2em;
 }
 
-.main-wrapper {
-    width : 40em;
-    display : flex;
-    flex-direction : column;
-    align-items : center;
-    flex : 1;
-    background-color : rgba(255, 255, 255, 0.4);
-}
-
 .navbar-wrapper {
     width : 40em;
     display : flex;
@@ -121,4 +112,30 @@ button {
     margin : 0;
     padding : 0;
     border : 0px soli #ffffff;
+}
+
+.main-wrapper {
+    width : 40em;
+    display : flex;
+    flex-direction : column;
+    align-items : center;
+    flex : 1;
+    background-color : rgba(255, 255, 255, 0.4);
+    position : block;
+}
+
+.main-container {
+    position : block;
+    display : flex;
+    flex-direction : column;
+    align-content : stretch;
+    flex : 1;
+    gap : 1em;
+    margin : 1em 0;
+}
+
+.main-container .typeItem {
+    background : #aeaeae;
+    padding : 1em;
+    border-radius : 0.5em;
 }

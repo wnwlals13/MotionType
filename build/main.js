@@ -4,12 +4,57 @@ const modal = document.querySelector(".modal-wrapper");
 const modal_close_btn = document.querySelector(".modal-header button");
 const modal_add_btn = document.querySelector(".modal-footer button");
 const modal_main = document.querySelector(".modal-inner .modal-main");
+const main = document.querySelector(".main-wrapper .main-container");
+/* -------------- variable -------------- */
+class TodoList {
+    get todo() {
+        return this._todo;
+    }
+    constructor() {
+        this._todo = [];
+    }
+    push(val) {
+        this._todo.push(val);
+    }
+    pop() {
+        return this._todo.shift();
+    }
+    size() {
+        return this._todo.length;
+    }
+}
 /* -------------- modal -------------- */
+let motionList = new TodoList();
+const isType = (thing) => true;
+function makeItem() {
+    let div = document.createElement('div');
+    div.classList.add('typeItem');
+    let h2 = document.createElement('h2');
+    let btn = document.createElement('button');
+    btn.innerText = "X";
+    motionList.todo.forEach(item => {
+        h2.innerText = item.title;
+        if (isType(item)) {
+            let img = document.createElement('img');
+            img.src = item.url;
+            div.appendChild(img);
+        }
+        else {
+            let p = document.createElement('p');
+            p.innerText = item.body;
+            div.appendChild(p);
+        }
+        div.appendChild(h2);
+        div.appendChild(btn);
+        main === null || main === void 0 ? void 0 : main.appendChild(div);
+    });
+}
 modal_close_btn === null || modal_close_btn === void 0 ? void 0 : modal_close_btn.addEventListener("click", closeModal);
 modal_add_btn === null || modal_add_btn === void 0 ? void 0 : modal_add_btn.addEventListener("click", (e) => {
     e.preventDefault();
     const result = getMotion(e);
-    makeMotion(result);
+    motionList.push(result); // 추가한 모션 배열
+    makeItem();
 });
 buttons.forEach(item => item.addEventListener("click", onShowModal));
 function onShowModal(e) {
@@ -85,10 +130,9 @@ function getMotion(arg) {
             };
         }
     }
-    // console.log(motion);
+    // 각 input 값 value 초기화하기
+    first.value = '';
+    second.value = '';
     handleModalShow('close');
     return motion;
-}
-function makeMotion(info) {
-    console.log(typeof info);
 }
